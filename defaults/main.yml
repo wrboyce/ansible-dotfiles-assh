@@ -1,0 +1,31 @@
+---
+assh_defaults:
+  User: "{{ user_username }}"
+  ForwardAgent: 'no'
+  IdentityFiles:  # prefer ed25519 over rsa
+    - ~/.ssh/id_ed25519
+    - ~/.ssh/id_rsa
+  ControlMaster: auto
+  ControlPath: ~/.ssh/.cm-%h-%p-%r.sock
+  ControlPersist: 'yes'
+
+
+assh_templates:
+  with-agent:
+    ForwardAgent: 'yes'
+
+  as-root:
+    User: root
+
+  as-git:
+    User: git
+
+  as-ubuntu:
+    User: ubuntu
+
+
+assh_hosts:
+  github.com:
+    Compression: 'yes'
+    Inherits:
+      - as-git

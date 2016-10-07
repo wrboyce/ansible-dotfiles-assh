@@ -1,0 +1,18 @@
+---
+- name: install assh
+  homebrew: name=assh state=latest
+  tags: [assh, dotfiles]
+
+- name: generate assh config
+  template: src=assh.yml.j2 dest="{{ user_home }}/.ssh/assh.yml"
+  vars:
+    defaults: {defaults: "{{ assh_defaults }}"}
+    templates: {templates: "{{ assh_templates }}"}
+    hosts: {hosts: "{{ assh_hosts }}"}
+  register: assh_config
+  tags: [assh, config, dotfiles]
+
+- name: generate ssh config
+  shell: /usr/local/bin/assh config build > {{ user_home }}/.ssh/config
+  when: assh_config.changed
+  tags: [assh, config, dotfiles]

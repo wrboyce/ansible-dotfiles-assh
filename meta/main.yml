@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Will Boyce
+  description: Configure ssh (via ssh)
+  license: Apache2
+  min_ansible_version: 1.2
+  platforms:
+  - name: MacOSX
+    versions:
+    - all
+## only support macOS until we work out how to install go binaries elsewhere
+#  - name: Ubuntu
+#    versions:
+#    - all
+#  - name: Debian
+#    versions:
+#    - all
+  galaxy_tags: [assh, ssh, dotfiles]
+
+dependencies: []
